@@ -20,45 +20,6 @@ $(document).ready(function() {
 		}
 	}
 
-	/* Persona Code */
-	$('#signin').click(function() {
-		navigator.id.request();
-	});
-
-	$('#signout').click(function () {
-		console.log("CLICK");
-		navigator.id.logout();
-	});
-
-	navigator.id.watch({
-		onlogin: function(assertion) {
-			$.ajax({
-				type: 'POST',
-				url: '/auth/login',
-				data: {assertion: assertion},
-				success: function(res, status, xhr) {
-					console.log('Logged in!');
-					console.log(res);
-					console.log(status);
-					$('#logged_out').css('visibility', 'hidden');
-					$('#logged_in').css('visibility', 'visible');
-				},
-				error: function(xhr, status, err) { console.log("Login failure: " + err); }
-			});
-		},
-		onlogout: function() {
-			$('#logged_out').css('visibility', 'visible');
-			$('#logged_in').css('visibility', 'hidden');
-			$.ajax({
-				type: 'POST',
-				url: '/auth/logout',
-				success: function(res, status, xhr) { window.location.reload(); },
-				error: function(xhr, status, err) { console.log("Logout failure: " + err); }
-			});
-		}
-	});
-});
-
 /**
  * Trim the whitespace around characters
  */
@@ -72,4 +33,4 @@ function trim11 (str) {
     }
     return str;
 }
-
+});
